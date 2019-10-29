@@ -1,0 +1,3 @@
+[submodule "themes/hestia-pure"]
+	path = themes/hestia-pure
+	url = git@github.com:/vyskocilm/hestia-pure

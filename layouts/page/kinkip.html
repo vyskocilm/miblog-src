@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en{{ end }}">
+{{ partial "head" . }}
+<body>
+  <div id="wrap" class="wrap">
+    {{ partial "header" . }}
+      <!-- post -->
+      <article class="post"　itemscope itemtype="http://schema.org/BlogPosting">
+        <p class="post__date">
+          <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" | safeHTML }}">{{ .Date.Format "2006.01.02" }}</time>
+        </p>
+        <div class="post-content">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
+        <h2>Kinkip: nápověda pro hru Piknik</h2>
+        <div>
+        <div>
+            <strong>Stav aplikace:&nbsp;</strong>
+            <span id="ready">Nahrávám aplikaci</div>
+        </div>
+        <div>
+            <strong>Hledané znaky:&nbsp;</strong>
+            <input id="characters" value = "piknik"></input>
+            <button id="execute" disabled = "1">Vylušti</button>
+        </div>
+        <br/>
+        <div id="result"></div>
+        </div>
+
+        <script>
+        $(document).ready (function () {
+
+            $("#characters").keyup (function (event) {
+                if (event.keyCode == 13) {
+                    $("execute").click ();
+                }}
+            );
+            $("#execute").keyup (function (event) {
+                if (event.keyCode == 13) {
+                    $("execute").click ();
+                }}
+            );
+            $("#ready").html ("Dokument nahrán, nahrávám databázi");
+        });
+        </script>
+    <script type="text/javascript" src="{{ .Site.BaseURL }}js/kinkip.js" ></script>
+        </div>
+      </article>
+      <!-- /post -->
+    </main>
+    {{ partial "footer" . }}
+  </div>
+{{ partial "js" . }}
+</body>
+</html>

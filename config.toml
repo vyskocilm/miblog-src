@@ -1,0 +1,16 @@
+baseURL = "https://vyskocilm.github.io/"
+languageCode = "en-us"
+title = "Miblog"
+theme = "hestia-pure"
+pygmentsOptions = "linenos=table"
+rssLimit = 15
+
+[author]
+  author = "Michal Vyskocil"
+  profile = "I am software developer and a former field manager with 12+ years of experience, Prague, Czech Republic"
+
+[Params]
+  localeOgp = "en"
+  keywords = "Linux, Go, Python, Javascript, Typescript"
+  twitter = "vyskocilm"
+  github = "vyskocilm"

@@ -1,7 +1,7 @@
 ---
 title: "qrget: easy to use privacy oriented cloudless file sharing"
 date: 2019-10-24T22:25:27+02:00
-draft: true
+draft: false
 github: https://github.com/vyskocilm/qrget
 ---
 

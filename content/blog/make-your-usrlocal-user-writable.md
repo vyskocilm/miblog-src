@@ -1,7 +1,7 @@
 ---
 title: "Make your /usr/local user writable"
 date: 2018-01-21T22:18:29+02:00
-draft: true
+draft: false
 ---
 
 # About

@@ -2,7 +2,7 @@
 title: "Golang CORS and Testing"
 date: 2018-12-18T19:27:15+02:00
 image: "img/gopher-flicker.jpg"
-draft: true
+draft: false
 ---
 
 Working on a web project spread in more domains brings you to [Cross-Origin Resource Sharing](https://www.html5rocks.com/en/tutorials/cors/). Browsers use it to if it code from one origin can call HTTP methods placed elsewhere. Responses must contain specific headers, like [Access-Control-Allow-Origin](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin), which must match requesting [Origin](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin) of the site issuing the call. More information about CORS can be found at [html5rocks](https://www.html5rocks.com/en/tutorials/cors/).

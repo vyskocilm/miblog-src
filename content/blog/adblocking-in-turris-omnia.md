@@ -2,7 +2,7 @@
 title: "Adblocking in Turris Omnia"
 date: 2018-12-29T22:39:57+02:00
 image: "blog/adblocking-in-turris-omnia/turris-omnia.png"
-draft: true
+draft: false
 ---
 
 As a long time Firefox user I was horrified to use web browser with very limited blocking capabilities. However Samsung Browser is very handy tool for some sites. However the number of spam, scam, or porn pages and advertisements makes browsing there **very** unpleasant experience. Especially if your kids want to browse that way.

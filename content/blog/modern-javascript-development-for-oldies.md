@@ -1,7 +1,7 @@
 ---
 title: "'Modern' Javascript Development for Oldies"
 date: 2018-04-04T22:45:29+02:00
-draft: true
+draft: false
 ---
 
 ## My Javascript experience

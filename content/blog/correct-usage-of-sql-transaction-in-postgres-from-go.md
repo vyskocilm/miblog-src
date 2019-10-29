@@ -2,7 +2,7 @@
 title: "Correct Usage of Sql Transaction in Postgres From Go"
 date: 2019-05-21T23:02:31+02:00
 image: "img/postgres-flicker.jpg"
-draft: true
+draft: false
 ---
 
 ## Problem

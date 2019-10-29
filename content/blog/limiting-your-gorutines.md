@@ -2,7 +2,7 @@
 title: "Limiting Your Gorutines"
 date: 2018-10-10T19:11:24+02:00
 image: "img/gopher-flicker.jpg"
-draft: true
+draft: false
 ---
 
 # Limiting your goroutines

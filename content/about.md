@@ -1,7 +1,7 @@
 ---
 title: "About Me"
 date: 2018-10-24T22:01:48+02:00
-draft: true
+draft: false
 notoc: true
 ---
 

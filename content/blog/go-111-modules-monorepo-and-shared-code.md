@@ -2,7 +2,7 @@
 title: "Go 111 Modules Monorepo and Shared Code"
 date: 2018-11-09T19:19:40+02:00
 image: "img/gopher-flicker.jpg"
-draft: true
+draft: false
 ---
 
 I recently joined company as a Python developer. However it turns out there is bigger need to evolve their code written in golang (and PHP and Javascript). I am not an expert in go, so it took me a while to figure things out. However I love to learn new things and to solve new puzzles (the real ones, there is nothing more boring to solve artificial ones for me)

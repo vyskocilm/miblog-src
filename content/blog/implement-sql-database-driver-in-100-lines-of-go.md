@@ -2,7 +2,7 @@
 title: "Implement Sql Database Driver in 100 Lines of Go"
 date: 2019-02-18T22:59:18+02:00
 image: "img/sql-flicker.jpg"
-draft: true
+draft: false
 ---
 
 Go [database/sql](https://golang.org/pkg/database/sql/) defines interfaces

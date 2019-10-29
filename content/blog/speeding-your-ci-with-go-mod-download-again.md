@@ -2,7 +2,7 @@
 title: "Speeding Your Ci With Go Mod Download Again"
 date: 2019-02-13T22:56:28+02:00
 image: "img/gopher-flicker.jpg"
-draft: true
+draft: false
 ---
 
 Running `go mod download` slows down each CI run a lot. More dependencies increases time and it wastes the bandwidth again and again. As we do use special CI containers for the task, then go modules can be downloaded during container build phase and CI build will benefit from it. There are many articles about this topic. However most of them discuss one go module per repository or Docker image. As I wrote recently, we do use [monorepo with many go modules](

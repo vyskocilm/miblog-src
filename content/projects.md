@@ -1,7 +1,7 @@
 ---
 title: "Projects"
 date: 2018-10-29T15:06:47+01:00
-draft: true
+draft: false
 ---
 
 Some nice things I did in the past

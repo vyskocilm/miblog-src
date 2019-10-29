@@ -1,3 +1,7 @@
 [submodule "themes/hestia-pure"]
 	path = themes/hestia-pure
 	url = git@github.com:/vyskocilm/hestia-pure
+[submodule "public"]
+	path = public
+	url = git@github.com:vyskocilm/vyskocilm.github.io.git
+	branch = master

@@ -1,4 +1,4 @@
-baseURL = "https://vyskocilm.github.io/"
+baseURL = "https://vyskocil.org/"
 languageCode = "en-us"
 title = "Miblog"
 theme = "hestia-pure"

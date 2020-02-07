@@ -22,4 +22,4 @@ fi
 git commit -m "$msg"
 
 # Push source and build repos.
-git push --force origin master
+git push origin master

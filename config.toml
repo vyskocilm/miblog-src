@@ -12,6 +12,5 @@ rssLimit = 15
 [Params]
   localeOgp = "en"
   keywords = "Linux, Go, Python, Javascript, Typescript"
-  twitter = "vyskocilm"
   github = "vyskocilm"
   mastodon = "https://witter.cz/@vyskocilm"

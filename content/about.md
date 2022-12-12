@@ -13,7 +13,6 @@ notoc: true
 
 See my
 
-* LinkedIn profile https://www.linkedin.com/in/michalvyskocil/
-* GitHub account: https://github.com/vyskocilm
 * Mastodon account: https://witter.cz/@vyskocilm
-* Twitter account: http://twitter.com/vyskocilm
+* GitHub account: https://github.com/vyskocilm
+* LinkedIn profile https://www.linkedin.com/in/michalvyskocil/

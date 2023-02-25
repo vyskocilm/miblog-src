@@ -1,7 +1,7 @@
 ---
 title: "Turris Omnia and syncthing"
 date: 2023-02-25T20:12:12+01:00
-image: "blog/turris-omnia-and-syncthing/enabled-syncthing-app.png"
+image: "blog/turris-omnia-and-syncthing/syncthing-logo.png"
 draft: false
 ---
 

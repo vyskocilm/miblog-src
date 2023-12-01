@@ -1,4 +1,4 @@
-baseURL = "https://vyskocil.org/"
+baseURL = "https://vyskocil.me/"
 languageCode = "en-us"
 title = "Miblog"
 theme = "hestia-pure"
@@ -11,6 +11,6 @@ rssLimit = 15
 
 [Params]
   localeOgp = "en"
-  keywords = "Linux, Go, Python, Javascript, Typescript"
+  keywords = "Linux, Go, Python, Containers, Immutable, Kubernetes, Docker, Podman"
   github = "vyskocilm"
   mastodon = "https://witter.cz/@vyskocilm"

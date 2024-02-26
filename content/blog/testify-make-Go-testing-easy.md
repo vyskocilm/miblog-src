@@ -23,14 +23,14 @@ I split it into
 
 Example as it comes with a [testing](https://pkg.go.dev/testing?tab=doc) package from the standard library.
 
-```go
+{{< highlight go >}}
 func TestAbs(t *testing.T) {
     got := Abs(-1)
     if got != 1 {
         t.Errorf("Abs(-1) = %d; want 1", got)
     }
 }
-```
+{{< / highlight >}}
 
 And reader will notice two things.
 
@@ -39,7 +39,7 @@ And reader will notice two things.
 
 Following function `Abs` is buggy.
 
-```go
+{{< highlight go >}}
 // main.go
 func Abs(i int) int {
     if i == -1 {
@@ -58,9 +58,9 @@ func TestAbs(t *testing.T) {
 		t.Errorf("Abs(-42) = %d; want 42", got)
 	}
 }
-```
+{{< / highlight >}}
 
-```bash
+{{< highlight sh >}}
 go test -v
 === RUN   TestAbs
 --- FAIL: TestAbs (0.00s)
@@ -68,7 +68,7 @@ go test -v
 FAIL
 exit status 1
 FAIL	_/home/mvyskocil/projects/vyskocilm/miblog-src/miblog/X	0.002s
-```
+{{< / highlight >}}
 
 ## Unit testing in Python
 
@@ -79,7 +79,7 @@ is as popular tool. It does the work by overloading standard
 [assert](https://docs.python.org/3/reference/lexical_analysis.html#keywords)
 keyword.
 
-```python
+{{< highlight python >}}
 def Abs(i: int) -> int:
     if i == -1:
         return 1
@@ -88,13 +88,13 @@ def Abs(i: int) -> int:
 def test_Abs():
     assert Abs(-1) == 1
     assert Abs(-42) == 42
-```
+{{< / highlight >}}
 
 As you can see, where even trivial test is on 4 lines of go, usage of `assert`
 and `py.test` command makes tests crispy and clean. It can be hardly done in
 less lines.
 
-```bash
+{{< highlight sh >}}
 ============================= test session starts ==============================
 platform linux -- Python 3.7.3, pytest-4.6.9, py-1.8.1, pluggy-0.13.1
 rootdir: /home/mvyskocil/X
@@ -113,7 +113,7 @@ E        +  where -42 = Abs(-42)
 
 main.py:8: AssertionError
 =========================== 1 failed in 0.03 seconds ===========================
-```
+{{< / highlight >}}
 
 While the output can be seen as unecessary verbose, it is far from truth. It
 gives as much detailed information as possible in a case of failure. Which
@@ -132,7 +132,7 @@ as a part of the project. Tests are mandatory for ZeroMQ projects, so once cant
 find a code like
 [czmq/src/zactor.c](https://github.com/zeromq/czmq/blob/master/src/zactor.c#L336)
 
-```c
+{{< highlight c >}}
 void
 zactor_test (bool verbose)
 {
@@ -146,7 +146,7 @@ zactor_test (bool verbose)
     assert (streq (string, "This is a string"));
     freen (string);
     zactor_destroy (&actor);
-```
+{{< / highlight >}}
 
 That means if you can have nice and crispy clean unit tests in C. There is
 hardly a reason for not having it in Go.
@@ -170,31 +170,31 @@ popular library bringing `py.test` like capabilities to Go.
 
 So this is how test looks like.
 
-```go
+{{< highlight go >}}
 import "github.com/stretchr/testify/assert"
 func TestAbs(t *testing.T) {
     assert.Equal(t, 1, Abs(-1))
     assert.Equal(t, 42, Abs(-42))
 }
-```
+{{< / highlight >}}
 
 Or we can create `assert.Assertion` structure, which is typically named
 `assert` to avoid putting `t` pointer everywhere. In most of cases hiding name
 for the module level import is considered as a bad practice. For `assert` and
 `require` is is fine and intended usage.
 
-```go
+{{< highlight go >}}
 import "github.com/stretchr/testify/assert"
 func TestAbs(t *testing.T) {
     assert := assert.New(t)
     assert.Equal(1, Abs(-1))
     assert.Equal(42, Abs(-42))
 }
-```
+{{< / highlight >}}
 
 And this is the run
 
-```bash
+{{< highlight sh >}}
 go test -v
 === RUN   TestAbs
 --- FAIL: TestAbs (0.00s)
@@ -207,24 +207,24 @@ go test -v
 FAIL
 exit status 1
 FAIL	X	0.003s
-```
+{{< / highlight >}}
 
 ## Error messages
 
 Many methods ends with `f` so they will print extra error messages in a case of failure.
 
-```go
+{{< highlight go >}}
 	assert.Equalf(4, Abs(-42), "fail in test %s", t.Name())
-```
+{{< / highlight >}}
 
 This becomes handy with a next topic.
 
-```shell
+{{< highlight sh >}}
         	            	expected: 4
         	            	actual  : -42
         	Test:       	TestAbs
         	Messages:   	fail in test TestAbs
-```
+{{< / highlight >}}
 
 ## Subtests
 
@@ -232,7 +232,7 @@ Go `testing` package allows you to run subtests inside your testing function.
 This has similar properties to test cases, where your tests can share common
 objects created in the begginning of each test.
 
-```go
+{{< highlight go >}}
 import "github.com/stretchr/testify/require"
 
 func TestAbs(t *testing.T) {
@@ -240,9 +240,9 @@ func TestAbs(t *testing.T) {
 	t.Run("abs-42", func(t *testing.T){require.Equalf(4, Abs(-42), "fail in test %s", t.Name())})
     t.Run("abs-1", func(t *testing.T){require.Equal(1, Abs(-1))})
 }
-```
+{{< / highlight >}}
 
-```bash
+{{< highlight sh >}}
 go test -v
 === RUN   TestAbs
 === RUN   TestAbs/abs-42
@@ -259,7 +259,7 @@ go test -v
 FAIL
 exit status 1
 FAIL	X	0.002s
-```
+{{< / highlight >}}
 
 There are two sub tests inside `TestAbs`
 
@@ -272,10 +272,10 @@ succesfull runs.
 
 Then there is another change in code.
 
-```diff
+{{< highlight diff >}}
 - import "github.com/stretchr/testify/assert"
 + import "github.com/stretchr/testify/require"
-```
+{{< / highlight >}}
 
 All the methods of `assert` package mark a test failure and let test to continue.
 On the other hand `require` will immediatelly stop the execution. It is the

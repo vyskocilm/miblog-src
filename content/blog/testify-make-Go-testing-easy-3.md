@@ -32,7 +32,7 @@ Additionally there are functions to be run before after the test as well.
 
 Below is an example of a suite with a function running before each test case.
 
-```go
+{{< highlight go >}}
 import "github.com/stretchr/testify/suite"
 
 type absSuite struct {
@@ -46,12 +46,12 @@ func (s *absSuite) SetupTest() {
         {name: "abs-1", expected: 1, input: -1},
     }
 }
-```
+{{< / highlight >}}
 
 Here we run through initalized test cases. And the test messes up with a shared
 resource.
 
-```go
+{{< highlight go >}}
 func (s *absSuite) TestAbs() {
     for _, tt := range s.cases {
         s.Assert().Equal(tt.expected, Abs(tt.input), "FAIL %s", tt.name)
@@ -59,27 +59,27 @@ func (s *absSuite) TestAbs() {
     s.cases = []testCase{}
     s.Require().Equal(0, len(s.cases))
 }
-```
+{{< / highlight >}}
 
 It is not a problem at ALL! The `SetupTest` creates new array each time from
 scratch. This is an advantage against table driven tests, where each run can
 broke shared state, unless the test is not written carefully.
 
-```go
+{{< highlight go >}}
 func (s *absSuite) TestNoOfCases() {
     s.Require().Equal(2, len(s.cases))
 }
-```
+{{< / highlight >}}
 
 Up to know the tests from shiny new suite does not run. As typical for a good
 Go code, there is a little magic behind the scenes. So integration of
 `testify.Suite` with a `testing` is done via new testing function.
 
-```go
+{{< highlight go >}}
 func TestSuite(t *testing.T) {
     suite.Run(t, new(absSuite))
 }
-```
+{{< / highlight >}}
 
 > Elementary, my dear Watson.
 
@@ -107,7 +107,7 @@ Disadvantages are
 In general mocks are one of the best tools to test protocols. So here is `abs`
 computation to microservices world.
 
-```go
+{{< highlight go >}}
 type MathService interface {
     Abs(context.Context, int) (int, error)
 }
@@ -117,7 +117,7 @@ type MathClient struct{
 func (c *MathClient) Abs(ctx context.Context, i int) (int, error) {
     return c.svc.Abs(ctx, i)
 }
-```
+{{< / highlight >}}
 
 Code pretends that one need X machine big cluster each time one want to get
 result. So it is impractical to setup, initialize and run it each time one type
@@ -125,7 +125,7 @@ result. So it is impractical to setup, initialize and run it each time one type
 
 Fortunatelly there is `testify/mock` to the rescue.
 
-```go
+{{< highlight go >}}
 import "github.com/stretchr/testify/mock"
 type MathMock struct {
     mock.Mock
@@ -134,12 +134,12 @@ func (m *MathMock) Abs(ctx context.Context, i int) (int, error) {
     args := m.Called(ctx, i)
     return args.Int(0), args.Error(1)
 }
-```
+{{< / highlight >}}
 
 And that's it. Now `MathMock` implements necessary interface, so it can be used
 in the test. So there is a need to write test case
 
-```go
+{{< highlight go >}}
 func TestMock(t *testing.T) {
     assert := assert.New(t)
     require := require.New(t)
@@ -151,11 +151,11 @@ func TestMock(t *testing.T) {
     require.NoError(err)
     assert.Equal(1, i)
 }
-```
+{{< / highlight >}}
 
 And it fail!
 
-```bash
+{{< highlight sh >}}
 assert: mock: I don't know what to return because the method call was unexpected.
         Either do Mock.On("Abs").Return(...) first, or remove the Abs() call.
         This method was unexpected:
@@ -163,13 +163,13 @@ assert: mock: I don't know what to return because the method call was unexpected
                 0: (*context.emptyCtx)(0xc000018188)
                 1: -1
         at: [main_test.go:164 main.go:46 main_test.go:175
-```
+{{< / highlight >}}
 
 This is because developer must instruct `mock` object to expect mocked function
 to be called with a specific arguments. Here comes the `On` method, which
 allows to define cases with an arbitrary deep level of a granularity.
 
-```go
+{{< highlight go >}}
 func TestMock(t *testing.T) {
     assert := assert.New(t)
     require := require.New(t)
@@ -184,13 +184,13 @@ func TestMock(t *testing.T) {
     require.NoError(err)
     assert.Equal(1, i)
 }
-```
+{{< / highlight >}}
 
 The problem is it ignores the input parameters at all. Wach call of mocked
 `Abs` will return `1, nil`. Better version, which simulates the buggy version
 of `Abs` is
 
-```
+{{< highlight go >}}
 func TestMock(t *testing.T) {
     assert := assert.New(t)
     require := require.New(t)
@@ -210,14 +210,14 @@ func TestMock(t *testing.T) {
     require.NoError(err)
     assert.Equal(42, i)
 }
-```
+{{< / highlight >}}
 
 ### Called once
 
 `Abs` is quite straightforward function to test. One easily assert
 things like number of calls of a mock
 
-```go
+{{< highlight go >}}
 // main.go
 // MathClient has a bug and calls abs twice
 func (c *MathClient) Abs(ctx context.Context, i int) (int, error) {
@@ -228,7 +228,7 @@ func (c *MathClient) Abs(ctx context.Context, i int) (int, error) {
 // test that function is called ONLY once
     mathMock.On("Abs", mock.Anything, -1).
     Return(1, nil).Once()
-```
+{{< / highlight >}}
 
 The same are `Twice` and `Times` methods, which allows to assert number of
 calls inside tested functions. Similar method is `Maybe`, which don't fail when
@@ -242,7 +242,7 @@ API is wrong, because context cancelation should immediatelly return err.
 However it would require adding gorutines and context into `MathClient.Abs`
 method.
 
-```go
+{{< highlight go >}}
 func TestMockTimeout(t *testing.T) {
 	assert := assert.New(t)
 	require := require.New(t)
@@ -261,7 +261,7 @@ func TestMockTimeout(t *testing.T) {
     require.NoError(ctx.Err())
 	assert.Equal(1, i)
 }
-```
+{{< / highlight >}}
 
 ### Advanced filtering
 
@@ -273,7 +273,7 @@ There is
 [MatchedBy](https://pkg.go.dev/github.com/stretchr/testify@v1.4.0/mock?tab=doc#MatchedBy)
 function providing argument matching via functions.
 
-```
+{{< highlight go >}}
 // main.go
 type AbsRequest struct {
     ctx     context.Context
@@ -290,7 +290,7 @@ type AbsRequest struct {
     mathMock.
         On("Abs", mock.Anything, mock.MatchedBy(absMatcher)).
         Return(1, nil)
-```
+{{< / highlight >}}
 
 With `absMatcher` it is
 

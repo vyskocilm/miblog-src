@@ -11,9 +11,9 @@ Once upon a time I got a task to merge duplicate URLs in our production database
 to develop. Code to migrate the database looked easy as weel. Until I turned the transaction on. Then very cryptic message appeared
 
 
-```sh
+{{< highlight auto >}}
  pq: unexpected Parse response 'C'
-```
+{{< / highlight >}}
 
 The error message was telling me *nothing*. And what is worse [ducking](https://duck.com) did not revealed anything. Except notes about Postgres protocol internals., which was something I did not wanted to dig into.  It was a hint from [@karolhrdina](https://github.com/karolhrdina) who have explained me the root cause well enough, so I can share my experience in my blog. Lessons learned - always work with a great colleagues, you can learn a lot from them!
 
@@ -23,7 +23,7 @@ Following text assume reader know about Go, particularly `database/sql` and `lib
 
 Following snippet omits a lot of details, but shows the algorithm
 
-```go
+{{< highlight go >}}
 rows, err := tx.Query("SELECT id, url, visists FROM schema.url WHERE url LIKE $1 ORDER BY id", pattern)
 
 for rows.Next() {
@@ -34,7 +34,7 @@ for rows.Next() {
                 _, err = tx.Exec("DELETE FROM schema.url WHERE id=$1", id)
         }
 }
-```
+{{< / highlight >}}
 
 1. For all urls matching the bad pattern do
 2. Try to normalize and if there is normalized version then
@@ -53,7 +53,7 @@ There is object called [cursor](https://www.postgresql.org/docs/10/plpgsql-curso
 
 So Go code changes a bit. There is no `*sql.Rows` and no `Next()` method to be used in the loop.
 
-```go
+{{< highlight go >}}
 _, err = tx.Exec("DECLARE url_cur CURSOR FOR SELECT id, url, visits FROM schema.url WHERE url LIKE $1 ORDER BY id", pattern)
 defer tx.Exec("CLOSE url_cur")
 
@@ -67,7 +67,7 @@ for {
 	}
         // call tx.Exec with UPSERT and DELETE
 }
-```
+{{< / highlight >}}
 
 The advantages are
 

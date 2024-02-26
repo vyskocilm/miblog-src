@@ -2,7 +2,7 @@ baseURL = "https://vyskocil.me/"
 languageCode = "en-us"
 title = "Miblog"
 theme = "hestia-pure"
-pygmentsOptions = "linenos=table"
+#pygmentsOptions = "linenos=table"
 rssLimit = 15
 
 [author]
@@ -14,3 +14,14 @@ rssLimit = 15
   keywords = "Linux, Go, Python, Containers, Immutable, Kubernetes, Docker, Podman"
   github = "vyskocilm"
   mastodon = "https://witter.cz/@vyskocilm"
+
+# https://gohugo.io/getting-started/configuration-markup/#highlight
+[markup]
+  [markup.highlight]
+    anchorLineNos = false
+    codeFences = false
+    lineNos = false
+    lineNumbersInTable = false
+
+    
+

@@ -54,7 +54,7 @@ the result does not look like a Go code at all. The following example is from
 [the Writing Specs](https://onsi.github.io/ginkgo/#writing-specs) chapter of
 Ginkgo documentation.
 
-```go
+{{< highlight go >}}
 var _ = Describe("Books", func() {
   var book *books.Book
 
@@ -66,12 +66,13 @@ var _ = Describe("Books", func() {
     }
     Expect(book.IsValid()).To(BeTrue())
   })
-```
+{{< / highlight >}}
+
 
 Godog is an another example. A casual reading of the example gave me no clue to how
 this worked. I would have been very confused if I had been asked to modify it.
 
-```go
+{{< highlight go >}}
 package main
 
 import "github.com/cucumber/godog"
@@ -96,7 +97,7 @@ func InitializeScenario(ctx *godog.ScenarioContext) {
         thereShouldBeRemaining,
     )
 }
-```
+{{< / highlight >}}
 
 Also, these libraries tends to hide `*t` as much as possible and insist
 on using their own assert methods.
@@ -104,7 +105,7 @@ on using their own assert methods.
 And last, but not least. They increase the level of indentation a lot. This is
 a particular problem for Go, as you can see
 
-```go
+{{< highlight go >}}
 TestMe(t *testing.T) {
     t.Parallel()
     for _, tt := range tests {
@@ -115,7 +116,7 @@ TestMe(t *testing.T) {
         })
     }
 }
-```
+{{< / highlight >}}
 
 # Fearless BDD style testing
 
@@ -125,7 +126,7 @@ TestMe(t *testing.T) {
 Let us rewrite a [rspec.info](https://rspec.info) test case from Ruby into
 idiomatic Go using nothing just a standard library. First the `Bowling` struct.
 
-```go
+{{< highlight go >}}
 package main
 
 type Bowling struct {
@@ -146,11 +147,11 @@ func (b *Bowling) Spare() {
 func (b Bowling) Score() int {
     return b.score
 }
-```
+{{< / highlight >}}
 
 And a test is simple - [see Go playground](https://go.dev/play/p/yf1rKtbr7CZ).
 
-```go
+{{< highlight go >}}
 package main
 
 import "testing"
@@ -206,11 +207,11 @@ func TestBowling(t *testing.T) {
         })
     }
 }
-```
+{{< / highlight >}}
 
 And running it is no surprise.
 
-```
+{{< highlight shell >}}
 === RUN   TestBowling
 === PAUSE TestBowling
 === CONT  TestBowling
@@ -222,7 +223,7 @@ And running it is no surprise.
 PASS
 
 Program exited.
-```
+{{< / highlight >}}
 
 Personally like this format more and more. It has nice advantages over all
 the other approaches.
@@ -240,16 +241,16 @@ the other approaches.
 It is longer than Ruby version and slightly more verbose than Go team's concise
 approach.
 
-```go
+{{< highlight go >}}
 var flagtests = []struct {
     in  string
     out string
 }{
     {"%a", "[%a]"},
     {"%-a", "[%-a]"},
-```
+{{< / highlight >}}
 
-However I like the clarity and the _idiomaticity_ of the result. Which is always
-a nice quality to have when working with a code.
+However I like the clarity. Which is always a nice quality to have when working
+with a code.
 
 
